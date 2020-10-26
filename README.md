@@ -2,7 +2,7 @@
 
 This is a project to keep track of completed homeschooling activities.
 
-## Code Used
+# Technology
 
-This project uses a mySql database, with data retrieval and update managed by a node express application. 
+This project was developed using mySql, and node express.  
 
