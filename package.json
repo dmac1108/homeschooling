@@ -1,7 +1,7 @@
 {
-  "name": "express-boilerplate",
+  "name": "homeschooling",
   "version": "1.0.0",
-  "description": "",
+  "description": "Use this app to track homeschooling activities",
   "main": "index.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
@@ -18,7 +18,9 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "pg": "^8.4.2",
+    "postgrator": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
