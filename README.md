@@ -2,8 +2,8 @@
 
 This app is used to track homeschooling activities for the purpose of demonstrating continuous instruction. It consists of a postgres homeschool database with a node express service to maintain the database and interface with the web application. 
 
-## Set up
-
+# Technology
+This project was developed using PostgreSQL and Node.js Express. 
 
 ## Scripts
 
@@ -21,3 +21,5 @@ When your new project is read for deployment, add a new Heroku application with 
 
 Run the following script to seed the database:
 psql -U rolename -d homeschool -f ./seeds/seed.homeschool.lessons.sql 
+ 
+
