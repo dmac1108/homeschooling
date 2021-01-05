@@ -45,8 +45,8 @@ describe(`Lessons service object`, function(){
     after('disconnect from db', () => db.destroy())
 
     before('clean the lessons table', () =>db('lessons').truncate())
-    before('clean the students table', ()=>db('students').truncate())
-    before('reset the serial number sequence', ()=>db('students').raw('select setval(pg_get_serial_sequence("students", "student_id"), COALESCE((SELECT MAX(student_id) +1 FROM students),1,false)'))
+    //before('clean the students table', ()=>db('students').truncate())
+    before('restart the student identity and truncate',() => db.raw('TRUNCATE students RESTART IDENTITY CASCADE'))
     
     before(()=>{
         return db
@@ -64,8 +64,9 @@ describe(`Lessons service object`, function(){
 
     describe(`getAllLessons()`,()=>{
         it(`resolves all lessons from 'lessons' table`, ()=>{
-            return LessonsService.getAllLessons()
+            return LessonsService.getAllLessons(db)
             .then(actual => {
+                
                 expect(actual).to.eql(testLessons);
             })
         })

@@ -1,6 +1,6 @@
 const LessonsService = {
-    getAllLessons(){
-        return 'all of the lessons'
+    getAllLessons(knex){
+        return knex.select('*').from('lessons');
     }
 }
 module.exports = LessonsService
