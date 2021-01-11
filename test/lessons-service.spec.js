@@ -2,6 +2,7 @@ require('dotenv').config()
 const { expect } = require("chai")
 const LessonsService = require('../src/lessons-service.js')
 const knex = require('knex')
+const { getAllLessons } = require('../src/lessons-service.js')
 
 describe(`Lessons service object`, function(){
     let db
@@ -47,29 +48,42 @@ describe(`Lessons service object`, function(){
     after('disconnect from db', () => db.destroy())
 
     before('clean the lessons table', () =>db('lessons').truncate())
-    //before('clean the students table', ()=>db('students').truncate())
+    
     before('restart the student identity and truncate',() => db.raw('TRUNCATE students RESTART IDENTITY CASCADE'))
     
-    before(()=>{
-        return db
-        .into('students')
-        .insert(testStudent)
-        
-    })
-
-    before(()=>{
-        return db
-        .into('lessons')
-        .insert(testLessons)
-    })
+    afterEach(()=> db('lessons').truncate())
+    afterEach('restart the student identity and truncate',() => db.raw('TRUNCATE students RESTART IDENTITY CASCADE'))
 
 
-    describe(`getAllLessons()`,()=>{
-        it(`resolves all lessons from 'lessons' table`, ()=>{
+    context(`Given 'lessons' has data`, ()=>{
+
+        before(()=>{
+            return db
+            .into('students')
+            .insert(testStudent)
+            
+        })
+    
+        before(()=>{
+            return db
+            .into('lessons')
+            .insert(testLessons)
+        })
+
+        it(`getAllLessons() resolves all lessons from 'lessons' table`, ()=>{
             return LessonsService.getAllLessons(db)
             .then(actual => {
                 
                 expect(actual).to.eql(testLessons);
+            })
+        })
+    })
+
+    context(`Given 'lessons' has no data`, ()=>{
+        it(`getAllLessons() returns an empty array`, ()=>{
+            return LessonsService.getAllLessons(db)
+            .then(actual => {
+                expect(actual).to.eql([])
             })
         })
     })
