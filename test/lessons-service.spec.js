@@ -14,7 +14,8 @@ describe(`Lessons service object`, function(){
     }];
     
     let testLessons = [{
-        date_completed: '2020-11-23',
+        lesson_id: 1,
+        date_completed: new Date('2020-11-23T16:28:32.615Z'),
         school_subject: 'Math',
         topic: 'Rounding Decimals',
         lesson_type: 'In-Person Instruction',
@@ -22,7 +23,8 @@ describe(`Lessons service object`, function(){
         student_id: 1
     },
     {
-        date_completed: '2020-11-23',
+        lesson_id: 2,
+        date_completed: new Date('2020-11-23T16:28:32.615Z'),
         school_subject: 'Science',
         topic: 'Weathering',
         lesson_type: 'In-Person Instruction',
